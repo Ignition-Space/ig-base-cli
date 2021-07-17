@@ -2,12 +2,13 @@
  * @Author: Cookie
  * @Date: 2021-07-03 21:57:20
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-17 17:06:54
+ * @LastEditTime: 2021-07-18 01:42:52
  * @Description:
  */
 
 import { ESLint } from 'eslint'
 import { getCwdPath, loggerTiming, loggerSuccess, loggerError, getDirPath } from '../util'
+import ora from "ora";
 
 // 1. Create an instance.
 const eslint = new ESLint({
@@ -37,9 +38,13 @@ const eslint = new ESLint({
 
 
 export const getEslint = async (path: string = 'src') => {
+  const spinner = ora('checking...')
 
   try {
-    loggerTiming('Eslint 校验');
+    loggerTiming('ESLINT CHECK');
+
+    spinner.start()
+
     // 2. Lint files.
     const results = await eslint.lintFiles([`${getCwdPath()}/${path}`]);
 
@@ -53,17 +58,19 @@ export const getEslint = async (path: string = 'src') => {
 
     // 5. Output it.
     if (resultText) {
-      loggerError('请检查===》')
-      console.log(resultText);
+      loggerError(`'PLEASE CHECK ===》', ${resultText}`);
     }
+
     else {
-      loggerSuccess('格式校对成功！');
+      spinner.succeed('Eslint CHECK SUCCESS!');
+      // loggerSuccess('Eslint check completed!');
     }
   } catch (error) {
-    process.exitCode = 1;
+    spinner.fail('ESLINT CHECK FAILED!');
     loggerError(error);
+    process.exit(1)
   } finally {
-    loggerTiming('Eslint 校验', false);
+    loggerTiming('ESLINT CHECK', false);
   }
 
 }
