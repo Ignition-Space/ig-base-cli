@@ -21,6 +21,3 @@ yarn.lock
 package-lock.json
 *bak
 .vscode
-
-
-build
