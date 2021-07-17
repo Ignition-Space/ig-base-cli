@@ -22,19 +22,5 @@ package-lock.json
 *bak
 .vscode
 
-# visual studio code
-.history
-*.log
-functions/*
-.temp/**
-
-# umi
-.umi
-.umi-production
-
-# screenshot
-screenshot
-.firebase
-.eslintcache
 
 build
