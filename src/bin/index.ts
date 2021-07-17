@@ -4,7 +4,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-04 14:16:56
+ * @LastEditTime: 2021-07-17 21:15:27
  * @Description:
  */
 
@@ -12,8 +12,7 @@
 import { Command } from 'commander';
 const program = new Command();
 
-import { getEslint } from '../eslint'
-import { buildWebpack } from '../build/webpack'
+import { execEslint, buildWebpack, buildRollup } from '../index'
 
 
 program
@@ -21,15 +20,25 @@ program
   .description('start eslint and fix code')
   .command('eslint')
   .action((value) => {
-    getEslint()
+    execEslint()
   })
 
 program
   .version('0.1.0')
-  .description('start eslint and fix code')
+  .description('start webpack build')
   .command('webpack')
   .action((value) => {
     buildWebpack()
   })
+
+
+program
+  .version('0.1.0')
+  .description('start rollup build')
+  .command('rollup')
+  .action((value) => {
+    buildRollup()
+  })
+
 
 program.parse(process.argv);
