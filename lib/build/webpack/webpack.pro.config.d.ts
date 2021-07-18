@@ -1,10 +1,14 @@
-interface IWebpack {
-    mode?: "development" | "production" | "none";
-    entry: any;
-    output: any;
+interface IWebpackConfig {
+    entry: {
+        app: string;
+    };
+    output: {
+        filename: string;
+        path: string;
+    };
     template: string;
 }
-declare const _default: ({ mode, entry, output, template }: IWebpack) => {
+export declare const getProConfig: (config: IWebpackConfig) => {
     mode: "development" | "production" | "none" | undefined;
     entry: any;
     target: string;
@@ -64,4 +68,4 @@ declare const _default: ({ mode, entry, output, template }: IWebpack) => {
     };
     plugins: any[];
 };
-export default _default;
+export {};

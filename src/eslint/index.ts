@@ -2,12 +2,11 @@
  * @Author: Cookie
  * @Date: 2021-07-03 21:57:20
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-18 01:42:52
+ * @LastEditTime: 2021-07-18 20:16:57
  * @Description:
  */
-
 import { ESLint } from 'eslint'
-import { getCwdPath, loggerTiming, loggerSuccess, loggerError, getDirPath } from '../util'
+import { getCwdPath, loggerTiming, loggerError, getDirPath } from '@/util'
 import ora from "ora";
 
 // 1. Create an instance.
@@ -46,7 +45,7 @@ export const getEslint = async (path: string = 'src') => {
     spinner.start()
 
     // 2. Lint files.
-    const results = await eslint.lintFiles([`${getCwdPath()}/${path}`]);
+    const results = await eslint.lintFiles([getCwdPath(path)]);
 
     // 3. Modify the files with the fixed code.
     await ESLint.outputFixes(results);

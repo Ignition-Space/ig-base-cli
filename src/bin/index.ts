@@ -4,16 +4,15 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-17 21:15:27
+ * @LastEditTime: 2021-07-18 21:04:27
  * @Description:
  */
 
-
+require('module-alias/register')
 import { Command } from 'commander';
 const program = new Command();
 
-import { execEslint, buildWebpack, buildRollup } from '../index'
-
+import { execEslint, buildWebpack, buildRollup, devWebpack } from '../index'
 
 program
   .version('0.1.0')
@@ -28,6 +27,10 @@ program
   .description('start webpack build')
   .command('webpack')
   .action((value) => {
+    const { NODE_ENV = 'development' } = process.env
+
+    if (NODE_ENV === 'development') return devWebpack()
+
     buildWebpack()
   })
 

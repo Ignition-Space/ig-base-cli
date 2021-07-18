@@ -18,7 +18,7 @@ const babel = require('rollup-plugin-babel')
 const css = require('rollup-plugin-css-only')
 const image = require('@rollup/plugin-image')
 
-import { getCwdPath } from "../../util";
+import { getCwdPath } from "@/util";
 
 export const inputOptions = {
   input: getCwdPath('./src/index.js'),
