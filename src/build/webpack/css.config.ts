@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-19 11:51:07
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 16:34:35
+ * @LastEditTime: 2021-07-19 20:43:20
  * @Description:
  */
 
@@ -52,8 +52,8 @@ export const getCssPlugin = () => {
   return {
     plugins: [
       new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[id].[contenthash].css',
+        filename: 'static/css/[name].[contenthash:8].css',
+        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
         ignoreOrder: true,
       })
     ]

@@ -1,6 +1,6 @@
 
 
-import { getDirPath } from '@/util'
+import { getCwdPath, getDirPath } from '@/util'
 import babelConfig from './babel.config'
 import { resolve } from 'path'
 
@@ -16,6 +16,10 @@ interface IWebpack extends Configuration {
   cssLoader?: any,
   plugins?: any
 }
+
+const imageInlineSizeLimit = parseInt(
+  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
+);
 
 export default ({
   mode,
@@ -51,20 +55,36 @@ export default ({
         },
         {
           test: /\.(png|svg|jpg|gif|jpeg)$/,
-          loader: 'file-loader'
+          loader: 'file-loader',
+          options: {
+            limit: imageInlineSizeLimit,
+            name: 'static/media/[name].[hash:8].[ext]',
+          },
+        },
+        {
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: imageInlineSizeLimit,
+            name: 'static/media/[name].[hash:8].[ext]',
+          },
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
-          loader: 'file-loader'
+          loader: 'file-loader',
+          exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+          options: {
+            name: 'static/media/[name].[hash:8].[ext]',
+          },
         },
         cssLoader
       ].filter(Boolean),
     },
     plugins: [
-      new ProgressPlugin(),
       new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: ['dist'],
+        cleanOnceBeforeBuildPatterns: [getCwdPath('dist')],
       }),
+      new ProgressPlugin(),
       new HtmlWebpackPlugin({
         template,
         filename: 'index.html',

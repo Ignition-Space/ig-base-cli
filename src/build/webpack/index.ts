@@ -2,13 +2,13 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 16:46:01
+ * @LastEditTime: 2021-07-19 21:07:50
  * @Description:
  */
 
 require('module-alias/register')
 import webpack from 'webpack';
-import { getCwdPath, loggerTiming, loggerError } from '@/util'
+import { getCwdPath, loggerTiming, loggerError, loggerInfo, loggerSuccess } from '@/util'
 import { loadFile } from '@/util/file'
 import { getProConfig } from './webpack.pro.config'
 import { getDevConfig } from './webpack.dev.config'
@@ -22,20 +22,23 @@ export const buildWebpack = () => {
 
   const webpackConfig = getProConfig({ ...rewriteConfig, cssLoader: getCssLoaders(false), ...getCssPlugin() })
 
-  console.log(webpackConfig.module)
-
   const compiler = webpack(webpackConfig);
 
   loggerTiming('WEBPACK BUILD');
 
-  compiler.run((err: any, stats: any) => {
-    if (err) {
-      if (!err.message) {
+  try {
+    compiler.run((err: any, stats: any) => {
+
+      if (err) {
         loggerError(err);
+      } else {
+        loggerSuccess('WEBPACK SUCCESS!');
       }
-    }
-    loggerTiming('WEBPACK BUILD', false);
-  });
+      loggerTiming('WEBPACK BUILD', false);
+    });
+  } catch (error) {
+    loggerError(error)
+  }
 
 }
 
@@ -43,8 +46,6 @@ export const devServerWebpack = () => {
 
   const rewriteConfig = loadFile(getCwdPath('./cli.config.json'))
   const webpackConfig = getDevConfig({ ...rewriteConfig, cssLoader: getCssLoaders(true) })
-
-  console.log(webpackConfig.module)
 
   const compiler = webpack(webpackConfig);
 
@@ -60,7 +61,7 @@ export const devServerWebpack = () => {
   const server = new WebpackDevServer(compiler, devServerOptions);
 
   server.listen(8000, '127.0.0.1', () => {
-    console.log('Starting server on http://localhost:8000');
+    loggerInfo('Starting server on http://localhost:8000');
   });
 
 }

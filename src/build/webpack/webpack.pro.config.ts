@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:16:47
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 16:18:09
+ * @LastEditTime: 2021-07-19 20:53:47
  * @Description:
  */
 
@@ -10,34 +10,50 @@ import getBaseConfig from './webpack.base.config'
 import { getCwdPath, } from '@/util'
 import { Configuration } from 'webpack'
 interface IWebpackConfig extends Configuration {
-  entry: {
+  entry?: {
     app: string
   }
-  output: {
+  output?: {
+    chunkFilename: string
     filename: string,
     path: string
   }
-  template: string
-  cssLoader: any
+  template?: string
+  cssLoader?: any
 }
 
 export const getProConfig = (config: IWebpackConfig): Configuration => {
-  const { entry: { app }, template, output: { filename, path }, cssLoader, plugins, ...rest } = config
+  const { entry, template, output, cssLoader, plugins, ...rest } = config
 
   return {
     ...getBaseConfig({
       mode: 'production',
       entry: {
-        app: getCwdPath(app || './src/index.js')
+        app: getCwdPath(entry?.app || './src/index.js')
       },
       output: {
-        filename: filename || 'build.js',
-        path: getCwdPath(path || './dist'), // 打包好之后的输出路径
+        chunkFilename: output?.chunkFilename || 'static/js/[name].[contenthash].js',
+        filename: output?.filename || 'static/js/[name].[contenthash].js',
+        path: getCwdPath(output?.path || './dist'), // 打包好之后的输出路径
       },
       template: getCwdPath(template || 'public/index.html'),
       cssLoader,
       plugins
     }),
+    optimization: {
+      runtimeChunk: {
+        name: (entrypoint: any) => `runtime-${entrypoint.name}`,
+      },
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+        },
+      },
+    },
     ...rest,
   }
 }
