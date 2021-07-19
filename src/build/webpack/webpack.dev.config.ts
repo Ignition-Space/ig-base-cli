@@ -2,14 +2,15 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:16:47
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-18 22:44:07
+ * @LastEditTime: 2021-07-19 16:38:10
  * @Description:
  */
 
 import getBaseConfig from './webpack.base.config'
 import { getCwdPath, } from '@/util'
+import { Configuration } from 'webpack'
 
-interface IWebpackConfig {
+interface IDevWebpackConfig extends Configuration {
   entry: {
     app: string
   }
@@ -17,11 +18,13 @@ interface IWebpackConfig {
     filename: string,
     path: string
   }
-  template: string
+  template: string,
+  cssLoader: any
 }
 
-export const getDevConfig = (config: IWebpackConfig) => {
-  const { entry: { app }, template, output: { filename, path }, ...rest } = config
+export const getDevConfig = (config: IDevWebpackConfig): Configuration => {
+
+  const { entry: { app }, template, output: { filename, path }, cssLoader, plugins, ...rest } = config
 
   return {
     ...getBaseConfig({
@@ -33,7 +36,9 @@ export const getDevConfig = (config: IWebpackConfig) => {
         filename: filename || 'build.js',
         path: getCwdPath(path || './dist'), // 打包好之后的输出路径
       },
-      template: getCwdPath(template || 'public/index.html')
+      template: getCwdPath(template || 'public/index.html'),
+      cssLoader,
+      plugins
     }),
     ...rest
   }

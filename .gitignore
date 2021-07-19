@@ -21,3 +21,5 @@ yarn.lock
 package-lock.json
 *bak
 .vscode
+
+/lib/**.d.ts

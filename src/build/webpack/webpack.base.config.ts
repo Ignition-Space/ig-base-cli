@@ -7,19 +7,24 @@ import { resolve } from 'path'
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-interface IWebpack {
+const { ProgressPlugin } = require('webpack')
+import { Configuration } from 'webpack'
+
+interface IWebpack extends Configuration {
   mode?: "development" | "production" | "none";
-  entry: any
-  output: any
   template: string
+  cssLoader?: any,
+  plugins?: any
 }
 
 export default ({
   mode,
   entry,
   output,
-  template
-}: IWebpack) => {
+  template,
+  cssLoader = {},
+  plugins = []
+}: IWebpack): Configuration => {
   return {
     mode,
     entry,
@@ -45,33 +50,6 @@ export default ({
           ]
         },
         {
-          test: /\.(css|less)$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  plugins: [
-                    [
-                      'postcss-preset-env',
-                      {
-                        ident: "postcss"
-                      },
-                    ],
-                  ],
-                },
-              }
-            }
-          ],
-        },
-        {
           test: /\.(png|svg|jpg|gif|jpeg)$/,
           loader: 'file-loader'
         },
@@ -79,14 +57,19 @@ export default ({
           test: /\.(woff|woff2|eot|ttf|otf)$/,
           loader: 'file-loader'
         },
-      ]
+        cssLoader
+      ].filter(Boolean),
     },
     plugins: [
-      new CleanWebpackPlugin(),
+      new ProgressPlugin(),
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: ['dist'],
+      }),
       new HtmlWebpackPlugin({
         template,
         filename: 'index.html',
       }),
-    ],
+      ...plugins
+    ].filter(Boolean),
   }
 }

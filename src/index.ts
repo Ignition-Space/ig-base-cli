@@ -2,14 +2,14 @@
  * @Author: Cookie
  * @Date: 2021-07-03 20:52:44
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-18 21:03:13
+ * @LastEditTime: 2021-07-19 16:25:33
  * @Description:
  */
 
 import { loggerError } from './util'
 import { getEslint } from './eslint'
 
-import { buildWebpack as selfBuildWebpack, devWebpack as selfDevWebpack } from './build/webpack'
+import { buildWebpack as selfBuildWebpack, devServerWebpack as selfDevWebpack } from './build/webpack'
 import { buildRollup as selfBuildRollup } from './build/rollup'
 
 // eslint 校验
@@ -28,7 +28,7 @@ export const buildWebpack = async () => {
 }
 
 // webpack 开发
-export const devWebpack = async () => {
+export const devServerWebpack = async () => {
   try {
     await selfDevWebpack()
   } catch (error) {
