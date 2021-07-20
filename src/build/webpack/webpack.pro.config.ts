@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:16:47
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 20:53:47
+ * @LastEditTime: 2021-07-20 11:31:15
  * @Description:
  */
 
@@ -20,6 +20,7 @@ interface IWebpackConfig extends Configuration {
   }
   template?: string
   cssLoader?: any
+  plugins?: any
 }
 
 export const getProConfig = (config: IWebpackConfig): Configuration => {

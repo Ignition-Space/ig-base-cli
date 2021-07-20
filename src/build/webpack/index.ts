@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 21:07:50
+ * @LastEditTime: 2021-07-20 11:52:21
  * @Description:
  */
 
@@ -13,18 +13,19 @@ import { loadFile } from '@/util/file'
 import { getProConfig } from './webpack.pro.config'
 import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
+import cacheConfig from './cache.config';
 
 const WebpackDevServer = require('webpack-dev-server/lib/Server')
 
 export const buildWebpack = () => {
 
+  loggerTiming('WEBPACK BUILD');
+
   const rewriteConfig = loadFile(getCwdPath('./cli.config.json'))
 
-  const webpackConfig = getProConfig({ ...rewriteConfig, cssLoader: getCssLoaders(false), ...getCssPlugin() })
+  const webpackConfig = getProConfig({ ...rewriteConfig, cssLoader: getCssLoaders(false), ...getCssPlugin(), ...cacheConfig })
 
   const compiler = webpack(webpackConfig);
-
-  loggerTiming('WEBPACK BUILD');
 
   try {
     compiler.run((err: any, stats: any) => {
@@ -34,6 +35,9 @@ export const buildWebpack = () => {
       } else {
         loggerSuccess('WEBPACK SUCCESS!');
       }
+      compiler.close(() => {
+        loggerInfo('WEBPACK GENERATE CACHE');
+      });
       loggerTiming('WEBPACK BUILD', false);
     });
   } catch (error) {
@@ -44,8 +48,9 @@ export const buildWebpack = () => {
 
 export const devServerWebpack = () => {
 
+  loggerTiming('WEBPACK DEV');
   const rewriteConfig = loadFile(getCwdPath('./cli.config.json'))
-  const webpackConfig = getDevConfig({ ...rewriteConfig, cssLoader: getCssLoaders(true) })
+  const webpackConfig = getDevConfig({ ...rewriteConfig, cssLoader: getCssLoaders(true), ...cacheConfig })
 
   const compiler = webpack(webpackConfig);
 
@@ -61,6 +66,7 @@ export const devServerWebpack = () => {
   const server = new WebpackDevServer(compiler, devServerOptions);
 
   server.listen(8000, '127.0.0.1', () => {
+    loggerTiming('WEBPACK DEV', false);
     loggerInfo('Starting server on http://localhost:8000');
   });
 

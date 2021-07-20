@@ -10,6 +10,7 @@ interface IWebpackConfig extends Configuration {
     };
     template?: string;
     cssLoader?: any;
+    plugins?: any;
 }
 export declare const getProConfig: (config: IWebpackConfig) => Configuration;
 export {};
