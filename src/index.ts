@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 20:52:44
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 16:25:33
+ * @LastEditTime: 2021-08-03 23:37:22
  * @Description:
  */
 
@@ -35,8 +35,6 @@ export const devServerWebpack = async () => {
     loggerError(error)
   }
 }
-
-
 
 // rollup 构建
 export const buildRollup = async () => {
