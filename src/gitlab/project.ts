@@ -2,12 +2,14 @@
  * @Author: Cookie
  * @Date: 2020-07-29 21:23:05
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-25 21:32:44
+ * @LastEditTime: 2021-08-07 23:39:30
  * @Description: gitLab 项目模块 api
  */
 
 import { methodV } from "@/util/http";
-
+// import { loadFile, existsFile } from '@/util/file'
+// import { getDirPath } from '@/util'
+// const defaultConfig = loadFile(getDirPath('../config/default.config.json')) // 读取本地配置
 
 interface IProjectList {
   pageSize?: number
@@ -18,8 +20,9 @@ interface IProjectList {
 }
 
 /**
- * @author: Cookie
  * @description: 获取工程列表
+ * @param {IProjectList} param1
+ * @return {*}
  */
 const getProjectList = async ({ pageSize, pageNum, access_token }: IProjectList) => {
   const { data: projectList } = await methodV({
@@ -35,8 +38,9 @@ const getProjectList = async ({ pageSize, pageNum, access_token }: IProjectList)
 };
 
 /**
- * @author: Cookie
  * @description: 获取用户所属工程
+ * @param {IProjectList} param1
+ * @return {*}
  */
 const getProjectByUser = async ({ pageSize, pageNum, access_token, userId }: IProjectList) => {
   const { data: projectList } = await methodV({
@@ -52,9 +56,10 @@ const getProjectByUser = async ({ pageSize, pageNum, access_token, userId }: IPr
 };
 
 /**
-* @author: Cookie
-* @description: 获取工程
-*/
+ * @description: 获取工程
+ * @param {IProjectList} param1
+ * @return {*}
+ */
 const getProject = async ({ id, access_token }: IProjectList) => {
   const { data: project } = await methodV({
     url: `/projects/${id}`,
@@ -65,8 +70,9 @@ const getProject = async ({ id, access_token }: IProjectList) => {
 };
 
 /**
- * @author: Cookie
  * @description: 创建 gitLab 工程
+ * @param {any} param1
+ * @return {*}
  */
 const createProjects = async ({ gitParams }: any) => {
   const { data } = await methodV({
@@ -80,8 +86,9 @@ const createProjects = async ({ gitParams }: any) => {
 };
 
 /**
- * @author: Cookie
  * @description: 删除 gitLab 工程保护分支
+ * @param {number} projectId
+ * @return {*}
  */
 const deleteProtectedBranches = async (projectId: number) => {
   const url = `/projects/${projectId}/protected_branches/master`;
@@ -93,8 +100,9 @@ const deleteProtectedBranches = async (projectId: number) => {
 };
 
 /**
- * @author: Cookie
  * @description: 设置 gitLab 工程保护分支
+ * @param {number} projectId
+ * @return {*}
  */
 const protectedBranches = async (projectId: number) => {
   const url = `/projects/${projectId}/protected_branches`;

@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 21:57:20
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-18 20:16:57
+ * @LastEditTime: 2021-08-07 23:23:05
  * @Description:
  */
 import { ESLint } from 'eslint'
@@ -34,7 +34,6 @@ const eslint = new ESLint({
   },
   resolvePluginsRelativeTo: getDirPath('node_modules')
 });
-
 
 export const getEslint = async (path: string = 'src') => {
   const spinner = ora('checking...')

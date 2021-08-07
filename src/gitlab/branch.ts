@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2019-08-29 14:17:50
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-25 21:32:06
+ * @LastEditTime: 2021-08-07 17:31:24
  * @Description: gitLab 分支模块 api
  */
 
@@ -19,10 +19,10 @@ interface IBranchList {
   ref?: string
 }
 
-
 /**
- * @author: Cookie
  * @description: 获取分支列表
+ * @param {*}
+ * @return {*}
  */
 const getBranchList = async ({
   pageSize,
@@ -54,8 +54,9 @@ const getBranchList = async ({
 };
 
 /**
- * @author: Cookie
- * @description: 获取单分支
+ * @description: 获取单个分支信息
+ * @param {IBranchList} param1
+ * @return {*}
  */
 const getBranch = async ({ projectId, branch }: IBranchList) => {
   const { code, data } = await methodV({
@@ -66,8 +67,9 @@ const getBranch = async ({ projectId, branch }: IBranchList) => {
 };
 
 /**
- * @author: Cookie
  * @description: 创建分支
+ * @param {IBranchList} param1
+ * @return {*}
  */
 const createBranch = async ({ ref, projectId, branch, access_token }: IBranchList) => {
   const { code, data } = await methodV({
@@ -82,27 +84,12 @@ const createBranch = async ({ ref, projectId, branch, access_token }: IBranchLis
   return data;
 };
 
-const setProtectedBranch = async ({ projectId }: IBranchList) => {
-  const { code, data } = await methodV({
-    url: `/projects/${projectId}/protected_branches`,
-    params: {
-      name: "zeus/*",
-      merge_access_level: 30,
-      push_access_level: 0,
-    },
-    method: "POST",
-  });
-  return data;
-};
 
-const delProtectedBranch = async ({ projectId }: IBranchList) => {
-  const { code, data } = await methodV({
-    url: `/projects/${projectId}/protected_branches/zeus%2F*`,
-    method: "DELETE",
-  });
-  return data;
-};
-
+/**
+ * @description: 删除分支
+ * @param {IBranchList} param1
+ * @return {*}
+ */
 const delBranch = async ({ projectId, branch = '' }: IBranchList) => {
   const { code, data } = await methodV({
     url: `/projects/${projectId}/repository/branches/${encodeURIComponent(branch)}`,
@@ -115,7 +102,5 @@ export {
   getBranchList,
   createBranch,
   getBranch,
-  setProtectedBranch,
-  delProtectedBranch,
   delBranch,
 };

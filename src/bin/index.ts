@@ -4,7 +4,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-03 23:58:06
+ * @LastEditTime: 2021-08-07 13:37:58
  * @Description:
  */
 
@@ -19,6 +19,11 @@ const program = new Command();
 
 import { execEslint, buildWebpack, buildRollup, devServerWebpack } from '../index'
 
+/**
+ * @description: eslint 检测
+ * @param {*}
+ * @return {*}
+ */
 program
   .version('0.1.0')
   .description('start eslint and fix code')
@@ -27,6 +32,11 @@ program
     execEslint()
   })
 
+/**
+ * @description: webpack 构建
+ * @param {*}
+ * @return {*}
+ */
 program
   .version('0.1.0')
   .description('start webpack build')
@@ -39,7 +49,11 @@ program
     buildWebpack()
   })
 
-
+/**
+ * @description: rollup 构建
+ * @param {*}
+ * @return {*}
+ */
 program
   .version('0.1.0')
   .description('start rollup build')
@@ -48,14 +62,17 @@ program
     buildRollup()
   })
 
-
+/**
+ * @description: 初始化 git 信息
+ * @param {*}
+ * @return {*}
+ */
 program
   .version('0.1.0')
-  .description('init git')
-  .command('init git')
+  .description('git init')
+  .command('git init')
   .action(() => {
     initGit()
   })
-
 
 program.parse(process.argv);
