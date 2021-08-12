@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-08-03 23:41:18
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-08 00:09:26
+ * @LastEditTime: 2021-08-12 23:31:33
  * @Description:
  */
 
@@ -30,7 +30,7 @@ const promptList = [
     type: 'input',
     message: '请输入用户名:',
     name: 'username',
-    default: "cookieboty"
+    default: "CookieBoty"
   },
   {
     type: 'password',
@@ -39,7 +39,7 @@ const promptList = [
   }
 ];
 
-export default () => {
+export const initGit = () => {
   inquirer.prompt(promptList).then((answers: any) => {
     const { gitType, gitUrl, username, password } = answers
     switch (gitType) {

@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-20 11:52:21
+ * @LastEditTime: 2021-08-12 22:51:39
  * @Description:
  */
 
@@ -21,7 +21,7 @@ export const buildWebpack = () => {
 
   loggerTiming('WEBPACK BUILD');
 
-  const rewriteConfig = loadFile(getCwdPath('./cli.config.json'))
+  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'))
 
   const webpackConfig = getProConfig({ ...rewriteConfig, cssLoader: getCssLoaders(false), ...getCssPlugin(), ...cacheConfig })
 
@@ -49,7 +49,7 @@ export const buildWebpack = () => {
 export const devServerWebpack = () => {
 
   loggerTiming('WEBPACK DEV');
-  const rewriteConfig = loadFile(getCwdPath('./cli.config.json'))
+  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'))
   const webpackConfig = getDevConfig({ ...rewriteConfig, cssLoader: getCssLoaders(true), ...cacheConfig })
 
   const compiler = webpack(webpackConfig);

@@ -4,18 +4,17 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-07 13:37:58
+ * @LastEditTime: 2021-08-13 00:00:57
  * @Description:
  */
 
 require('module-alias/register')
 import { Command } from 'commander';
-import initGit from '@/inquirer/initGit';
+import inquirer from '@/inquirer';
 
+const { initGit, addTpl, selectTpl } = inquirer
 
 const program = new Command();
-
-
 
 import { execEslint, buildWebpack, buildRollup, devServerWebpack } from '../index'
 
@@ -74,5 +73,35 @@ program
   .action(() => {
     initGit()
   })
+
+
+/**
+ * @description: 添加模板
+ * @param {*}
+ * @return {*}
+ */
+program
+  .version('0.1.0')
+  .description('add tpl')
+  .command('add tpl')
+  .action(() => {
+    addTpl()
+  })
+
+
+/**
+ * @description: 初始化模板
+ * @param {*}
+ * @return {*}
+ */
+program
+  .version('0.1.0')
+  .description('init tpl')
+  .command('init tpl')
+  .action(() => {
+    selectTpl()
+  })
+
+
 
 program.parse(process.argv);

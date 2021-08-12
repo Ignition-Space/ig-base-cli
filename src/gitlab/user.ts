@@ -2,14 +2,12 @@
  * @Author: Cookie
  * @Date: 2021-08-07 17:13:45
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-08 00:33:48
+ * @LastEditTime: 2021-08-08 22:43:29
  * @Description:
  */
 
 
 import { gitPost } from "@/util/http";
-
-
 
 interface IToken {
   access_token: string

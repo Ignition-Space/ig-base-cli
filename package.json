@@ -38,6 +38,7 @@
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "commander": "^8.0.0",
     "css-loader": "^5.2.6",
+    "download-git-repo": "^3.0.2",
     "eslint": "^7.30.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
