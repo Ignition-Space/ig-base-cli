@@ -2,11 +2,11 @@
  * @Author: Cookie
  * @Date: 2019-08-29 14:17:50
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-07 17:31:24
+ * @LastEditTime: 2021-08-13 12:10:48
  * @Description: gitLab 分支模块 api
  */
 
-import { methodV } from "@/util/http";
+import { methodV } from "@/gitlab/request";
 
 interface IBranchList {
   pageSize?: number

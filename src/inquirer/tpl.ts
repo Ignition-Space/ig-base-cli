@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-08-03 23:41:18
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 00:14:49
+ * @LastEditTime: 2021-08-13 12:33:58
  * @Description:
  */
 
@@ -11,6 +11,7 @@ import inquirer from 'inquirer';
 import { updateTpl, getTplList, loadTpl } from '@/tpl'
 
 import type { ITpl } from '@/tpl'
+import { getGithubBranch } from '@/github';
 
 export const addTpl = () => {
   const promptList = [
@@ -37,18 +38,18 @@ export const addTpl = () => {
 
   inquirer.prompt(promptList).then((answers: any) => {
     const { tplUrl, name, desc } = answers
-    updateTpl(tplUrl, name, desc)
+    updateTpl({ tplUrl, name, desc })
   })
 }
 
 export const selectTpl = () => {
-  const tplList = getTplList()
+  const tplList = getTplList() as ITpl[]
   const promptList = [
     {
       type: 'list',
       message: '请选择模板下载:',
       name: 'name',
-      choices: tplList && tplList.map((tpl: ITpl) => tpl.name)
+      choices: tplList.map((tpl: ITpl) => tpl.name)
     },
     {
       type: 'input',
@@ -62,8 +63,12 @@ export const selectTpl = () => {
 
   inquirer.prompt(promptList).then((answers: any) => {
     const { name, path } = answers
-    const select = tplList && tplList.filter((tpl: ITpl) => tpl.name)
-    const tplUrl = select && select[0].tplUrl || ''
-    loadTpl(name, tplUrl, path)
+    const select = tplList.filter((tpl: ITpl) => tpl.name)
+    const { downloadUrl, org } = select[0]
+
+    // 重新组装下载链接
+    const loadUrl = `${downloadUrl}/${org}/zip/refs/heads/main`
+    getGithubBranch(select[0])
+    loadTpl(name, loadUrl, path)
   })
 }

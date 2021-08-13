@@ -2,48 +2,53 @@
  * @Author: Cookie
  * @Date: 2021-08-12 22:01:01
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 00:15:52
+ * @LastEditTime: 2021-08-13 12:08:12
  * @Description:
  */
 
-import { loggerError, loggerSuccess, getDirPath, getCwdPath } from '@/util'
+import { loggerError, loggerSuccess, getDirPath, getCwdPath, loggerWarring } from '@/util'
 import { loadFile, writeFile } from '@/util/file'
 import download from 'download-git-repo'
-
 export interface ITpl {
   tplUrl: string
   name: string
   desc: string
+  org?: string
+  downloadUrl?: string
+  apiUrl?: string
 }
-
-/**
- * @description: 添加模板信息
- * @param {string} tplUrl
- * @param {string} name
- * @param {string} desc
- * @return {*}
- */
 
 const cacheTpl = getDirPath('../cacheTpl')
 
-export const updateTpl = async (tplUrl: string, name: string, desc: string) => {
+/**
+ * @description: 添加模板信息
+ * @param {ITpl} params
+ * @return {*}
+ */
+export const updateTpl = async (params: ITpl) => {
+  const { tplUrl, name, desc } = params
+  const { pathname } = new URL(tplUrl)
+  let isExist = false
   try {
-    const tplConfig = loadFile<ITpl[]>(`${cacheTpl}/.tpl.json`)
-    let file = [{
+    const reTpl: ITpl = {
       tplUrl,
       name,
       desc
-    }]
+    }
+    if (tplUrl.includes('github.com')) {
+      reTpl.org = pathname.substring(1)
+      reTpl.downloadUrl = 'https://codeload.github.com'
+      reTpl.apiUrl = 'https://api.github.com'
+    }
+
+    const tplConfig = loadFile<ITpl[]>(`${cacheTpl}/.tpl.json`)
+    let file = [reTpl]
     if (tplConfig) {
-      const isExist = tplConfig.some(tpl => tpl.name === name)
+      isExist = tplConfig.some(tpl => tpl.name === name)
       if (isExist) {
         file = tplConfig.map(tpl => {
           if (tpl.name === name) {
-            return {
-              tplUrl,
-              name,
-              desc
-            }
+            return reTpl
           }
           return tpl
         })
@@ -55,7 +60,7 @@ export const updateTpl = async (tplUrl: string, name: string, desc: string) => {
       }
     }
     writeFile(cacheTpl, '.tpl.json', JSON.stringify(file, null, "\t"))
-    loggerSuccess('Add Template Successful!')
+    loggerSuccess(`${isExist ? 'Update' : 'Add'} Template Successful!`)
   } catch (error) {
     loggerError(error)
   }
@@ -72,15 +77,15 @@ export const getTplList = () => {
     if (tplConfig) {
       return tplConfig
     }
-    loggerError('No template!')
+    loggerWarring('No template! Please add template first!')
+    process.exit(1)
   } catch (error) {
     loggerError(error)
   }
 }
 
-export const loadTpl = (name: string, tplUrl: string, path: string) => {
-
-  download(`direct:${tplUrl}`, getCwdPath(`./${path}`), { clone: true }, (err: string) => {
+export const loadTpl = (name: string, downloadUrl: string, path: string) => {
+  download(`direct:${downloadUrl}`, getCwdPath(`./${path}`), (err: string) => {
     if (err) {
       loggerError(err)
     } else {

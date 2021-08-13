@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:14:43
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-12 22:50:54
+ * @LastEditTime: 2021-08-13 11:15:12
  * @Description:
  */
 
@@ -12,6 +12,7 @@ import { loggerError, loggerSuccess } from './index'
 
 export const loadFile = <T = {}>(path: string): T | false | undefined => {
   try {
+    console.log(fs.existsSync(path), path)
     if (!fs.existsSync(path)) {
       return false
     }
