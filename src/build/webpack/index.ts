@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-12 22:51:39
+ * @LastEditTime: 2021-08-13 16:23:52
  * @Description:
  */
 
@@ -29,7 +29,6 @@ export const buildWebpack = () => {
 
   try {
     compiler.run((err: any, stats: any) => {
-
       if (err) {
         loggerError(err);
       } else {

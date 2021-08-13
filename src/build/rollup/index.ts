@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-17 17:52:22
  * @LastEditors: Cookie
- * @LastEditTime: 2021-07-18 19:39:31
+ * @LastEditTime: 2021-08-13 16:24:50
  * @Description:
  */
 
@@ -15,7 +15,7 @@ export const buildRollup = async () => {
 
   loggerTiming('ROLLUP BUILD');
 
-  const spinner = ora('ROLLUP building...')
+  const spinner = ora('ROLLUP Building...')
 
   spinner.start();
 

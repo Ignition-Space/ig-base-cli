@@ -1,7 +1,7 @@
 /*
  * @Author: Cookie
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 14:12:30
+ * @LastEditTime: 2021-08-13 16:37:30
  * @Description: request 模块
  */
 import { loggerError } from '@/util';
@@ -26,18 +26,12 @@ const GET = async <T>({ url, query = {} }: IMethodV) => {
           "content-type": "application/json",
           "Accept": "application/vnd.github.v3+json",
           "User-Agent": "Fe-Cli-App",
-          "Date": new Date(),
-          "X-RateLimit-Limit": 60,
-          "X-RateLimit-Remaining": 60,
-          "X-RateLimit-Reset": new Date().getTime()
         },
       }, (error, response, body) => {
-        console.log(error)
-        console.log(response, body)
-        if (!error && response.statusCode == 200) {
+        if (!error && body) {
           resolve(body)
         } else {
-          reject(body)
+          reject(error)
         }
       });
     })

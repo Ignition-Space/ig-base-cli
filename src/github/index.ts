@@ -2,15 +2,15 @@
  * @Author: Cookie
  * @Date: 2021-08-13 12:08:35
  * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 12:34:09
+ * @LastEditTime: 2021-08-13 16:40:23
  * @Description:
  */
 
 import { GET } from "./request"
 
 import type { ITpl } from '@/tpl'
-
-interface IBranch {
+import { loggerError } from "@/util"
+export interface IBranch {
   name: string,
   commit: {
     sha: string,
@@ -25,10 +25,17 @@ interface IBranch {
  * @return {*}
  */
 export const getGithubBranch = async (params: ITpl) => {
-  const { apiUrl, org } = params
-  const url = `${apiUrl}/repos/${org}/branches`
-  console.log('url==>', url)
-  const res = await GET<IBranch>({ url })
-  console.log(res)
-  return res
+  try {
+
+    const { apiUrl, org } = params
+    const url = `${apiUrl}/repos/${org}/branches`
+    const res = await GET<IBranch[]>({ url })
+    if (Array.isArray(res)) {
+      return res
+    }
+    loggerError(JSON.stringify(res))
+    process.exit(1)
+  } catch (error) {
+    loggerError(error)
+  }
 }
