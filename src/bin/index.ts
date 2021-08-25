@@ -3,12 +3,17 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 00:00:57
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-25 10:51:50
  * @Description:
  */
 
-require('module-alias/register')
+// require('module-alias/register')
+
+import path from "path";
+import alias from "module-alias";
+alias(path.resolve(__dirname, "../../"));
+
 import { Command } from 'commander';
 import inquirer from '@/inquirer';
 
