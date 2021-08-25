@@ -1,12 +1,13 @@
 {
   "name": "@boty-design/fe-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command line interface tools",
   "main": "index.js",
   "bin": {
     "fe-cli": "lib/bin/index.js"
   },
   "scripts": {
+    "prepublish": "tsc",
     "build": "tsc"
   },
   "author": "CookieBoty",
