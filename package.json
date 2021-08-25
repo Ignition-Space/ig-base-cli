@@ -1,5 +1,5 @@
 {
-  "name": "fe-cli",
+  "name": "@boty-design/fe-cli",
   "version": "1.0.0",
   "description": "Command line interface tools",
   "main": "index.js",
