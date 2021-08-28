@@ -1,12 +1,11 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 16:23:52
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-28 23:33:40
  * @Description:
  */
 
-require('module-alias/register')
 import webpack from 'webpack';
 import { getCwdPath, loggerTiming, loggerError, loggerInfo, loggerSuccess } from '@/util'
 import { loadFile } from '@/util/file'
@@ -17,6 +16,11 @@ import cacheConfig from './cache.config';
 
 const WebpackDevServer = require('webpack-dev-server/lib/Server')
 
+/**
+ * @description: 
+ * @param {*} webpack 构建
+ * @return {*}
+ */
 export const buildWebpack = () => {
 
   loggerTiming('WEBPACK BUILD');
@@ -45,6 +49,11 @@ export const buildWebpack = () => {
 
 }
 
+/**
+ * @description: 
+ * @param {*} webpack 开发环境
+ * @return {*}
+ */
 export const devServerWebpack = () => {
 
   loggerTiming('WEBPACK DEV');

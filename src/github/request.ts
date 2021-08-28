@@ -1,7 +1,7 @@
 /*
  * @Author: Cookie
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 16:37:30
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-28 23:55:28
  * @Description: request 模块
  */
 import { loggerError } from '@/util';
@@ -25,7 +25,7 @@ const GET = async <T>({ url, query = {} }: IMethodV) => {
         headers: {
           "content-type": "application/json",
           "Accept": "application/vnd.github.v3+json",
-          "User-Agent": "Fe-Cli-App",
+          "User-Agent": "boty-App",
         },
       }, (error, response, body) => {
         if (!error && body) {
