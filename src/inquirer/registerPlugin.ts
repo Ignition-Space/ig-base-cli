@@ -2,11 +2,14 @@
  * @Author: Cookie
  * @Date: 2021-08-03 23:41:18
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 20:55:19
+ * @LastEditTime: 2021-08-29 23:25:04
  * @Description: 注册组件
  */
 
 import inquirer from 'inquirer';
+import { existNpm, npmInstall } from '@/util/npm'
+import { loggerSuccess } from '@/util';
+import { updatePlugin } from '@/plugin'
 
 const promptList = [
   {
@@ -24,8 +27,13 @@ const promptList = [
 ];
 
 export const registerPlugin = () => {
-  inquirer.prompt(promptList).then((answers: any) => {
+  inquirer.prompt(promptList).then(async (answers: any) => {
     const { pluginName } = answers
-    console.log(pluginName)
+    const exist = await existNpm(`@boty-design/${pluginName}`)
+    if (exist) {
+      npmInstall(`@boty-design/${pluginName}`)
+      loggerSuccess(`@boty-design/${pluginName} register successful!`)
+      updatePlugin({ name: `@boty-design/${pluginName}` })
+    }
   })
 }

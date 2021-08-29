@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-08-12 22:01:01
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 11:38:05
+ * @LastEditTime: 2021-08-29 23:16:03
  * @Description:
  */
 
@@ -18,7 +18,7 @@ export interface ITpl {
   apiUrl?: string
 }
 
-const cacheTpl = '.cacheTpl'
+const cacheTpl = '.botyCache'
 
 /**
  * @description: 添加模板信息

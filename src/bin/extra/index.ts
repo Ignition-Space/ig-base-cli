@@ -4,12 +4,9 @@
  */
 
 import { ICommand } from '../index'
+import { getPluginList } from '@/plugin'
 
-const extraPack = [
-  {
-    name: '@boty-design/fe-plugin-eslint'
-  }
-]
+const extraPack = getPluginList() as any[]
 
 export const initExtraPack = () => {
   const extraPacks: ICommand[] = []

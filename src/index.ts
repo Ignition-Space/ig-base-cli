@@ -1,12 +1,13 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-03 20:52:44
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-03 23:37:22
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-29 22:42:42
  * @Description:
  */
 
 import { loggerError } from './util'
+import { checkVersion as selfCheckVersion } from './util/npm'
 import { getEslint } from './eslint'
 
 import { buildWebpack as selfBuildWebpack, devServerWebpack as selfDevWebpack } from './build/webpack'
@@ -44,4 +45,9 @@ export const buildRollup = async () => {
   } catch (error) {
     loggerError(error)
   }
+}
+
+
+export const checkVersion = async () => {
+  await selfCheckVersion()
 }

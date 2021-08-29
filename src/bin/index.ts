@@ -4,7 +4,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 21:31:20
+ * @LastEditTime: 2021-08-29 22:42:09
  * @Description:
  */
 
@@ -40,11 +40,9 @@ const initCommand = (commandConfig: ICommand[]) => {
   })
 }
 
-
 const init = () => {
-  // const extraPacks = initExtraPack()
-  // initCommand([...internallyCommand, ...extraPacks])
-  initCommand([...internallyCommand])
+  const extraPacks = initExtraPack()
+  initCommand([...internallyCommand, ...extraPacks])
 }
 
 init()

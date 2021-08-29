@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:14:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 11:45:00
+ * @LastEditTime: 2021-08-29 23:24:56
  * @Description: 文件操作类
  */
 
@@ -19,7 +19,6 @@ export const loadFile = <T = {}>(path: string, system: boolean = true): T | fals
       return false
     }
     const data = fs.readJsonSync(rePath);
-    loggerSuccess('file existed!')
     return data
   } catch (err) {
     loggerError(`Error reading file from disk: ${rePath}`);

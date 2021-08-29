@@ -3,8 +3,7 @@
  * @Description: 工具类
  */
 
-import { checkVersion } from '@/util/checkVersion';
-
+import { checkVersion } from '@/index';
 
 /**
  * @description: 添加模板
