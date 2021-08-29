@@ -1,36 +1,35 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-18 19:14:43
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 11:15:12
- * @Description:
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-29 11:45:00
+ * @Description: 文件操作类
  */
 
 
-const fs = require('fs');
-import { loggerError, loggerSuccess } from './index'
+import fs from 'fs-extra'
+import os from 'os'
+import { loggerError, loggerSuccess, loggerInfo } from './index'
 
-export const loadFile = <T = {}>(path: string): T | false | undefined => {
+
+export const loadFile = <T = {}>(path: string, system: boolean = true): T | false | undefined => {
+  const rePath = system ? `${os.homedir()}/${path}` : path
   try {
-    console.log(fs.existsSync(path), path)
-    if (!fs.existsSync(path)) {
+    if (!fs.pathExistsSync(rePath)) {
       return false
     }
-    const data = fs.readFileSync(path, 'utf8');
-    const config = JSON.parse(data);
-    return config
+    const data = fs.readJsonSync(rePath);
+    loggerSuccess('file existed!')
+    return data
   } catch (err) {
-    loggerError(`Error reading file from disk: ${err}`);
+    loggerError(`Error reading file from disk: ${rePath}`);
   }
 }
 
-export const existsFile = (path: string) => {
-  return new Promise((resolve, reject) => {
-    fs.exists(path, (exists: boolean) => {
-      if (exists) resolve(true)
-      reject(false)
-    })
-  })
+export const existsFile = (path: string, system: boolean = true) => {
+  const rePath = system ? `${os.homedir()}/${path}` : path
+  loggerInfo(rePath)
+  return fs.pathExistsSync(rePath)
 }
 
 /**
@@ -40,20 +39,13 @@ export const existsFile = (path: string) => {
  * @param {string} file
  * @return {*}
  */
-export const writeFile = (path: string, fileName: string, file: string) => {
+export const writeFile = (path: string, fileName: string, file: object, system: boolean = true) => {
+  const rePath = system ? `${os.homedir()}/${path}` : path
+  loggerInfo(rePath)
   try {
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
-    }
-    fs.writeFile(`${path}/${fileName}`, file, (error: Error) => {
-      if (error) {
-        console.log(error)
-        loggerError('Write file failed!')
-      } else {
-        loggerSuccess('Write file successful!')
-      }
-    })
+    fs.outputJsonSync(`${rePath}/${fileName}`, file)
+    loggerSuccess('Writing file successful!')
   } catch (err) {
-    loggerError(`Error reading file from disk: ${err}`);
+    loggerError(`Error writing file from disk: ${err}`);
   }
 }

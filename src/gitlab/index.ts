@@ -1,8 +1,8 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-25 21:34:07
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-12 22:01:27
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-29 11:37:46
  * @Description:
  */
 
@@ -21,10 +21,10 @@ const gitLabInit = async (gitUrl: string, username: string, password: string) =>
   if (username && password) {
     try {
       const { access_token } = await getToken(gitUrl, username, password)
-      writeFile(getDirPath('../config'), '.default.gitlab.config.json', JSON.stringify({
+      writeFile('.girConfig', '.default.gitlab.config.json', {
         "GIT_Lab_URL": gitUrl,
         "GIT_Lab_TOKEN": access_token
-      }, null, "\t"))
+      })
       loggerSuccess('Login Successful!')
     } catch (error) {
       loggerError(error)

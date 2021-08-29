@@ -1,8 +1,8 @@
 /*
  * @Author: Cookie
  * @Date: 2021-08-12 22:01:01
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 12:08:12
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-29 11:38:05
  * @Description:
  */
 
@@ -18,7 +18,7 @@ export interface ITpl {
   apiUrl?: string
 }
 
-const cacheTpl = getDirPath('../cacheTpl')
+const cacheTpl = '.cacheTpl'
 
 /**
  * @description: 添加模板信息
@@ -59,7 +59,7 @@ export const updateTpl = async (params: ITpl) => {
         ]
       }
     }
-    writeFile(cacheTpl, '.tpl.json', JSON.stringify(file, null, "\t"))
+    writeFile(cacheTpl, '.tpl.json', file)
     loggerSuccess(`${isExist ? 'Update' : 'Add'} Template Successful!`)
   } catch (error) {
     loggerError(error)
