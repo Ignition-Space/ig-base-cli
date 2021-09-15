@@ -9,7 +9,7 @@ import shelljs from 'shelljs'
 const packageInfo = require('../../package.json');
 
 const parseVersion = (ver: string) => {
-  return ver.split('.').toString()
+  return Number(ver.split('.').toString())
 }
 
 export const checkVersion = async () => {
