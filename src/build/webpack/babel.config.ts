@@ -1,8 +1,8 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-17 16:36:01
- * @LastEditors: Cookie
- * @LastEditTime: 2021-07-20 11:15:34
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-05 14:03:38
  * @Description:
  */
 
@@ -18,7 +18,14 @@ export default {
         {
           "runtime": "automatic"
         }
-      ]
+      ],
+      [
+        require.resolve("@babel/preset-typescript"),
+        {
+          "isTSX": true,
+          "allExtensions": true
+        }
+      ],
     ],
   },
 }

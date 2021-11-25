@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-28 23:33:40
+ * @LastEditTime: 2021-11-05 16:00:32
  * @Description:
  */
 
@@ -25,9 +25,14 @@ export const buildWebpack = () => {
 
   loggerTiming('WEBPACK BUILD');
 
-  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'))
+  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'), false)
 
-  const webpackConfig = getProConfig({ ...rewriteConfig, cssLoader: getCssLoaders(false), ...getCssPlugin(), ...cacheConfig })
+  const webpackConfig = getProConfig({
+    ...rewriteConfig,
+    cssLoader: getCssLoaders(false),
+    ...getCssPlugin(),
+    ...cacheConfig
+  })
 
   const compiler = webpack(webpackConfig);
 
@@ -46,7 +51,6 @@ export const buildWebpack = () => {
   } catch (error) {
     loggerError(error)
   }
-
 }
 
 /**
@@ -57,7 +61,7 @@ export const buildWebpack = () => {
 export const devServerWebpack = () => {
 
   loggerTiming('WEBPACK DEV');
-  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'))
+  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'), false)
   const webpackConfig = getDevConfig({ ...rewriteConfig, cssLoader: getCssLoaders(true), ...cacheConfig })
 
   const compiler = webpack(webpackConfig);
@@ -66,6 +70,7 @@ export const devServerWebpack = () => {
     stats: 'errors-only',
     contentBase: 'dist',
     hot: true,
+    disableHostCheck: true,
     historyApiFallback: true,
     compress: true,
     open: true
@@ -73,7 +78,7 @@ export const devServerWebpack = () => {
 
   const server = new WebpackDevServer(compiler, devServerOptions);
 
-  server.listen(8000, '127.0.0.1', () => {
+  server.listen(8080, "0.0.0.0", () => {
     loggerTiming('WEBPACK DEV', false);
     loggerInfo('Starting server on http://localhost:8000');
   });

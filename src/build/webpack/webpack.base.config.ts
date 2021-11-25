@@ -49,13 +49,11 @@ export default ({
         {
           test: /\.(js|jsx|ts|tsx)$/,
           use: babelConfig,
-          exclude: [
-            [getDirPath('node_modules')], // 由于node_modules 都是编译过的文件，这里我们不让 babel 去处理其下面的 js 文件
-          ]
+          exclude: /node_modules/ // 由于node_modules 都是编译过的文件，这里我们不让 babel 去处理其下面的 js 文件
         },
         {
           test: /\.(png|svg|jpg|gif|jpeg)$/,
-          loader: 'file-loader',
+          loader: require.resolve('file-loader'),
           options: {
             limit: imageInlineSizeLimit,
             name: 'static/media/[name].[hash:8].[ext]',
@@ -91,5 +89,11 @@ export default ({
       }),
       ...plugins
     ].filter(Boolean),
+    // externals: {
+    //   'react': 'React',
+    //   'react-dom': 'ReactDOM',
+    //   'react-router-dom': 'ReactRouterDOM',
+    //   'antd': 'antd'
+    // },
   }
 }

@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:14:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 23:24:56
+ * @LastEditTime: 2021-11-05 13:06:26
  * @Description: 文件操作类
  */
 
@@ -14,6 +14,7 @@ import { loggerError, loggerSuccess, loggerInfo } from './index'
 
 export const loadFile = <T = {}>(path: string, system: boolean = true): T | false | undefined => {
   const rePath = system ? `${os.homedir()}/${path}` : path
+
   try {
     if (!fs.pathExistsSync(rePath)) {
       return false
