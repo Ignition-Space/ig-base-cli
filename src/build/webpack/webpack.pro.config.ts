@@ -2,13 +2,14 @@
  * @Author: Cookie
  * @Date: 2021-07-18 19:16:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-05 16:00:21
+ * @LastEditTime: 2021-11-25 16:49:14
  * @Description:
  */
 
 import getBaseConfig from './webpack.base.config'
 import { getCwdPath, } from '@/util'
 import { Configuration } from 'webpack'
+const TerserPlugin = require("terser-webpack-plugin");
 interface IWebpackConfig extends Configuration {
   entry?: {
     app: string
@@ -42,6 +43,15 @@ export const getProConfig = (config: IWebpackConfig): Configuration => {
       plugins
     }),
     optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          test: /\.js(\?.*)?$/i,
+          include: getCwdPath('src'),
+          exclude: /node_modules/ // 由于node_modules 都是编译过的文件，这里我们不让 babel 去处理其下面的 js 文件
+        }),
+      ],
       runtimeChunk: {
         name: (entrypoint: any) => `runtime-${entrypoint.name}`,
       },
@@ -49,8 +59,9 @@ export const getProConfig = (config: IWebpackConfig): Configuration => {
         cacheGroups: {
           commons: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
             chunks: 'all',
+            priority: 10, // 优先级
+            enforce: true
           },
         },
       },

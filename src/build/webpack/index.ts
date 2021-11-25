@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-05 16:00:32
+ * @LastEditTime: 2021-11-25 16:48:18
  * @Description:
  */
 
@@ -13,6 +13,9 @@ import { getProConfig } from './webpack.pro.config'
 import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
+
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const smp = new SpeedMeasurePlugin();
 
 const WebpackDevServer = require('webpack-dev-server/lib/Server')
 
@@ -34,6 +37,7 @@ export const buildWebpack = () => {
     ...cacheConfig
   })
 
+  // const compiler = webpack(smp.wrap(webpackConfig));
   const compiler = webpack(webpackConfig);
 
   try {

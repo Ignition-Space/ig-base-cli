@@ -9,6 +9,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const { ProgressPlugin } = require('webpack')
 import { Configuration } from 'webpack'
+const chalk = require('chalk')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 interface IWebpack extends Configuration {
   mode?: "development" | "production" | "none";
@@ -27,7 +29,7 @@ export default ({
   output,
   template,
   cssLoader = {},
-  plugins = []
+  plugins = [],
 }: IWebpack): Configuration => {
   return {
     mode,
@@ -38,17 +40,20 @@ export default ({
       modules: ['node_modules', getDirPath('../../node_modules')]
     },
     resolve: {
+      symlinks: false,
       alias: {
         '@': resolve('src')
       },
       extensions: ['.ts', '.tsx', '.js', '.json'],
       modules: ['node_modules', getDirPath('../../node_modules')],
+      mainFiles: ['index'],
     },
     module: {
       rules: [
         {
           test: /\.(js|jsx|ts|tsx)$/,
           use: babelConfig,
+          include: getCwdPath('src'),
           exclude: /node_modules/ // 由于node_modules 都是编译过的文件，这里我们不让 babel 去处理其下面的 js 文件
         },
         {
@@ -79,6 +84,9 @@ export default ({
       ].filter(Boolean),
     },
     plugins: [
+      new ProgressBarPlugin({
+        format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`
+      }),
       new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: [getCwdPath('dist')],
       }),
