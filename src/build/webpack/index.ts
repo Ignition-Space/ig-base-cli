@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-23 20:49:27
+ * @LastEditTime: 2022-06-23 20:56:54
  * @Description:
  */
 
@@ -14,6 +14,7 @@ import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
 const openBrowser = require('react-dev-utils/openBrowser')
+const clearConsole = require('react-dev-utils/clearConsole');
 
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
@@ -68,9 +69,6 @@ export const devServerWebpack = () => {
 
   loggerTiming('WEBPACK DEV');
 
-  let isFirstCompile = true
-
-
   const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'), false)
   const webpackConfig = getDevConfig({
     cssLoader: getCssLoaders(true),
@@ -104,11 +102,9 @@ export const devServerWebpack = () => {
   const server = new WebpackDevServer(devServerOptions, compiler);
 
   compiler.hooks.done.tap('done', stats => {
-    if (isFirstCompile) {
-      isFirstCompile = false
-      console.log('oppo the Browser to:：', url)
-      openBrowser(url)
-    }
+    clearConsole();
+    console.log('oppo the Browser to:：', url)
+    openBrowser(url)
   })
 
   server.start(() => {
