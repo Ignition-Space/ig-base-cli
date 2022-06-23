@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 20:52:44
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 22:42:42
+ * @LastEditTime: 2022-04-27 15:58:53
  * @Description:
  */
 
@@ -46,7 +46,6 @@ export const buildRollup = async () => {
     loggerError(error)
   }
 }
-
 
 export const checkVersion = async () => {
   await selfCheckVersion()

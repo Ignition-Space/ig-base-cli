@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-25 16:48:18
+ * @LastEditTime: 2022-06-23 20:49:27
  * @Description:
  */
 
@@ -13,11 +13,13 @@ import { getProConfig } from './webpack.pro.config'
 import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
+const openBrowser = require('react-dev-utils/openBrowser')
 
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 
-const WebpackDevServer = require('webpack-dev-server/lib/Server')
+// const WebpackDevServer = require('webpack-dev-server/lib/Server')
+const WebpackDevServer = require('webpack-dev-server')
 
 /**
  * @description: 
@@ -65,26 +67,52 @@ export const buildWebpack = () => {
 export const devServerWebpack = () => {
 
   loggerTiming('WEBPACK DEV');
+
+  let isFirstCompile = true
+
+
   const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'), false)
-  const webpackConfig = getDevConfig({ ...rewriteConfig, cssLoader: getCssLoaders(true), ...cacheConfig })
+  const webpackConfig = getDevConfig({
+    cssLoader: getCssLoaders(true),
+    ...rewriteConfig,
+    ...cacheConfig
+  })
+
+  const HOST = webpackConfig?.devServer?.host || 'localhost'
+  const PORT = webpackConfig?.devServer?.port || 8000
+  const protocol = webpackConfig?.devServer?.https ? 'https' : 'http'
+  const url = `${protocol}://${HOST}:${PORT}`
 
   const compiler = webpack(webpackConfig);
 
   const devServerOptions = {
-    stats: 'errors-only',
-    contentBase: 'dist',
-    hot: true,
-    disableHostCheck: true,
+    client: {
+      progress: true,
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+      logging: 'info',
+    },
     historyApiFallback: true,
+    hot: true,
     compress: true,
-    open: true
+    port: PORT,
+    open: false,
   };
 
-  const server = new WebpackDevServer(compiler, devServerOptions);
+  const server = new WebpackDevServer(devServerOptions, compiler);
 
-  server.listen(8080, "0.0.0.0", () => {
+  compiler.hooks.done.tap('done', stats => {
+    if (isFirstCompile) {
+      isFirstCompile = false
+      console.log('oppo the Browser to:：', url)
+      openBrowser(url)
+    }
+  })
+
+  server.start(() => {
     loggerTiming('WEBPACK DEV', false);
-    loggerInfo('Starting server on http://localhost:8000');
+    loggerInfo(`Starting server on ${url}`);
   });
-
 }

@@ -11,13 +11,20 @@ import { buildWebpack, buildRollup, devServerWebpack } from '@/index'
  * @return {*}
  */
 
-export const webpackCommand = {
+export const webpackDevCommand = {
   version: '0.1.0',
   description: 'start webpack build',
-  command: 'webpack',
+  command: 'start',
   action: () => {
-    const { NODE_ENV = 'development' } = process.env
-    if (NODE_ENV === 'development') return devServerWebpack()
+    devServerWebpack()
+  }
+}
+
+export const webpackBuildCommand = {
+  version: '0.1.0',
+  description: 'start webpack build',
+  command: 'build',
+  action: () => {
     buildWebpack()
   }
 }
@@ -30,12 +37,12 @@ export const webpackCommand = {
 export const rollupCommand = {
   version: '0.1.0',
   description: 'start rollup build',
-  command: 'rollup',
+  command: 'rollup:dev',
   action: () => buildRollup()
 }
 
-
 export default [
-  webpackCommand,
+  webpackDevCommand,
+  webpackBuildCommand,
   rollupCommand
 ]

@@ -1,8 +1,8 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-03 21:57:20
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-07 23:23:05
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-23 13:47:31
  * @Description:
  */
 import { ESLint } from 'eslint'
@@ -28,7 +28,6 @@ const eslint = new ESLint({
       "sourceType": "module"
     },
     "plugins": [
-      "react",
       "@typescript-eslint",
     ],
   },
