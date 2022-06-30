@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-30 14:17:56
+ * @LastEditTime: 2022-06-30 14:43:45
  * @Description:
  */
 
@@ -92,7 +92,7 @@ export const devServerWebpack = () => {
         errors: true,
         warnings: false,
       },
-      logging: 'info',
+      logging: 'error',
     },
     historyApiFallback: true,
     hot: true,
