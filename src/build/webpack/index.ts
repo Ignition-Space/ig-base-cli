@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-23 20:56:54
+ * @LastEditTime: 2022-06-30 14:17:56
  * @Description:
  */
 
@@ -76,6 +76,8 @@ export const devServerWebpack = () => {
     ...cacheConfig
   })
 
+  let firstOpen = false
+
   const HOST = webpackConfig?.devServer?.host || 'localhost'
   const PORT = webpackConfig?.devServer?.port || 8000
   const protocol = webpackConfig?.devServer?.https ? 'https' : 'http'
@@ -102,13 +104,13 @@ export const devServerWebpack = () => {
   const server = new WebpackDevServer(devServerOptions, compiler);
 
   compiler.hooks.done.tap('done', stats => {
+    if (firstOpen) return
     clearConsole();
-    console.log('oppo the Browser to:：', url)
-    openBrowser(url)
-  })
-
-  server.start(() => {
     loggerTiming('WEBPACK DEV', false);
     loggerInfo(`Starting server on ${url}`);
-  });
+    openBrowser(url)
+    firstOpen = true
+  })
+
+  server.start(() => { });
 }
