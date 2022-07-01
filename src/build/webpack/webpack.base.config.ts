@@ -14,6 +14,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 interface IWebpack extends Configuration {
   mode?: "development" | "production" | "none";
   template: string
+  publicPath?: string
   cssLoader?: any,
   plugins?: any
 }
@@ -27,6 +28,7 @@ export default ({
   entry,
   output,
   template,
+  publicPath = '/',
   cssLoader = {},
   plugins = [],
 }: IWebpack): Configuration => {
@@ -99,6 +101,7 @@ export default ({
       }),
       new HtmlWebpackPlugin({
         template,
+        publicPath,
         filename: 'index.html',
       }),
       ...plugins

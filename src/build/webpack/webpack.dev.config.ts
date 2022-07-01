@@ -20,12 +20,13 @@ interface IDevWebpackConfig extends Configuration {
     path: string
   }
   template?: string,
+  publicPath?: string
   cssLoader?: any
 }
 
 export const getDevConfig = (config: IDevWebpackConfig): Configuration => {
 
-  const { entry, template, output, cssLoader, plugins, ...rest } = config
+  const { entry, template, publicPath, output, cssLoader, plugins, ...rest } = config
 
   return {
     ...getBaseConfig({
@@ -39,6 +40,7 @@ export const getDevConfig = (config: IDevWebpackConfig): Configuration => {
         path: getCwdPath(output?.path || './dist'), // 打包好之后的输出路径
       },
       template: getCwdPath(template || 'public/index.html'),
+      publicPath,
       cssLoader,
       plugins
     }),
