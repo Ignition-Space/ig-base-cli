@@ -1,9 +1,14 @@
+# @boty-design/fe-cli
+
+[![NPM version][npm-ver-img]][npm-url]
+[![NPM downloads][npm-dl-img]][npm-url]
+[![NPM license][npm-lc-img]][npm-url]
 
 ## 安装
 ```jsx
-$ npm install @boty-design/components --save
+$ npm install @boty-design/fe-cli --save
 
-$ yarn add @boty-design/components
+$ yarn add @boty-design/fe-cli
 
 ```
 ## 命令
@@ -19,3 +24,9 @@ $ yarn add @boty-design/components
 ## LICENSE
 
 [MIT](https://en.wikipedia.org/wiki/MIT_License)
+
+
+[npm-ver-img]: https://img.shields.io/npm/v/@boty-design/fe-cli?style=flat-square
+[npm-dl-img]: https://img.shields.io/npm/dm/@boty-design/fe-cli.svg?style=flat-square
+[npm-lc-img]: https://img.shields.io/npm/l/@boty-design/fe-cli.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@boty-design/fe-cli
