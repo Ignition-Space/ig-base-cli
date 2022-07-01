@@ -1,6 +1,6 @@
 {
   "name": "@boty-design/fe-cli",
-  "version": "1.0.9-alpha.0",
+  "version": "1.0.9-alpha.1",
   "description": "Command line interface tools",
   "main": "index.js",
   "bin": {
@@ -8,9 +8,10 @@
   },
   "commandName": "boty",
   "scripts": {
-    "prepublish": "tsc",
+    "prepublishOnly": "tsc",
     "build": "tsc"
   },
+  "files": ["lib"],
   "author": "CookieBoty",
   "license": "ISC",
   "devDependencies": {
