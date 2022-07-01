@@ -103,7 +103,7 @@ export default ({
         cleanOnceBeforeBuildPatterns: [getCwdPath('dist')],
       }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'DEPLOY_ENV': JSON.stringify(process.env.DEPLOY_ENV),
         ...injectionEnvironment,
       }),
       new HtmlWebpackPlugin({
