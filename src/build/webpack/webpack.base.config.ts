@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 import { Configuration } from 'webpack'
+import webpack from 'webpack'
 const chalk = require('chalk')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
@@ -16,7 +17,8 @@ interface IWebpack extends Configuration {
   template: string
   publicPath?: string
   cssLoader?: any,
-  plugins?: any
+  plugins?: any,
+  injectionEnvironment?: {[key: string]: string}
 }
 
 const imageInlineSizeLimit = parseInt(
@@ -31,6 +33,7 @@ export default ({
   publicPath = '/',
   cssLoader = {},
   plugins = [],
+  injectionEnvironment,
 }: IWebpack): Configuration => {
   return {
     mode,
@@ -98,6 +101,10 @@ export default ({
       }),
       new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: [getCwdPath('dist')],
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        ...injectionEnvironment,
       }),
       new HtmlWebpackPlugin({
         template,

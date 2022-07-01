@@ -20,6 +20,7 @@ interface IDevWebpackConfig extends Configuration {
     path: string
   }
   template?: string,
+  injectionEnvironment?: {[key: string]: string}
   publicPath?: string
   cssLoader?: any
 }
