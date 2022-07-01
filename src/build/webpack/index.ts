@@ -13,6 +13,7 @@ import { getProConfig } from './webpack.pro.config'
 import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
+import { loadConfig } from '@/util/config';
 const openBrowser = require('react-dev-utils/openBrowser')
 const clearConsole = require('react-dev-utils/clearConsole');
 
@@ -69,7 +70,7 @@ export const devServerWebpack = () => {
 
   loggerTiming('WEBPACK DEV');
 
-  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'), false)
+  const rewriteConfig = loadConfig();
   const webpackConfig = getDevConfig({
     cssLoader: getCssLoaders(true),
     ...rewriteConfig,
@@ -97,8 +98,9 @@ export const devServerWebpack = () => {
     historyApiFallback: true,
     hot: true,
     compress: true,
-    port: PORT,
+    port: 8000,
     open: false,
+    ...rewriteConfig.devServer,
   };
 
   const server = new WebpackDevServer(devServerOptions, compiler);

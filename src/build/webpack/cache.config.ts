@@ -10,7 +10,7 @@ import { getCwdPath } from '@/util'
 
 export default {
   cache: {
-    type: 'filesystem',  //  'memory' | 'filesystem'
+    type: 'filesystem' as const,  //  'memory' | 'filesystem'
     cacheDirectory: getCwdPath('./temp_cache'), // 默认将缓存存储在 当前运行路径/.cache/webpack
     // 缓存依赖，当缓存依赖修改时，缓存失效
     buildDependencies: {

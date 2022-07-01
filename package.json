@@ -1,6 +1,6 @@
 {
   "name": "@boty-design/fe-cli",
-  "version": "1.0.9-alpha.3",
+  "version": "1.0.9-alpha.4",
   "description": "Command line interface tools",
   "main": "index.js",
   "bin": {
