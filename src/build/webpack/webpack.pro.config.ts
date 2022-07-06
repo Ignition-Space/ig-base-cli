@@ -14,7 +14,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ESBuildPlugin = require('esbuild-webpack-plugin').default;
 interface IWebpackConfig extends Configuration {
   entry?: {
-    app: string
+    app?: string
   }
   output?: {
     chunkFilename: string

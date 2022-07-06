@@ -32,7 +32,7 @@ export const buildWebpack = () => {
 
   loggerTiming('WEBPACK BUILD');
 
-  const rewriteConfig = loadFile<any>(getCwdPath('./cli.config.json'), false)
+  const rewriteConfig = loadConfig();
 
   const webpackConfig = getProConfig({
     ...rewriteConfig,
