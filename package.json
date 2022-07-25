@@ -1,6 +1,6 @@
 {
   "name": "@boty-design/fe-cli",
-  "version": "1.0.9-alpha.5",
+  "version": "1.0.9-alpha.6",
   "description": "Command line interface tools",
   "main": "index.js",
   "bin": {
@@ -11,10 +11,13 @@
     "prepublishOnly": "tsc",
     "build": "tsc"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "author": "CookieBoty",
   "license": "ISC",
   "devDependencies": {
+    "@types/columnify": "^1.5.1",
     "@types/eslint": "^7.2.13",
     "@types/fs-extra": "^9.0.12",
     "@types/inquirer": "^7.3.3",
@@ -48,6 +51,7 @@
     "browserslist": "^4.21.0",
     "caniuse-lite": "^1.0.30001358",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "columnify": "^1.6.0",
     "commander": "^8.0.0",
     "css-loader": "^5.2.6",
     "download-git-repo": "^3.0.2",

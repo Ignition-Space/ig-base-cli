@@ -6,7 +6,7 @@
  * @Description:
  */
 
-import webpack from 'webpack';
+import webpack, { Stats } from 'webpack';
 import { getCwdPath, loggerTiming, loggerError, loggerInfo, loggerSuccess } from '@/util'
 import { loadFile } from '@/util/file'
 import { getProConfig } from './webpack.pro.config'
@@ -14,6 +14,7 @@ import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
 import { loadConfig } from '@/util/config';
+import outputProductSize from "@/util/outputProductSize";
 const openBrowser = require('react-dev-utils/openBrowser')
 const clearConsole = require('react-dev-utils/clearConsole');
 
@@ -49,6 +50,7 @@ export const buildWebpack = () => {
       if (err) {
         loggerError(err);
       } else {
+        outputProductSize(stats);
         loggerSuccess('WEBPACK SUCCESS!');
       }
       compiler.close(() => {
