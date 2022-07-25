@@ -14,7 +14,7 @@ import { getDevConfig } from './webpack.dev.config'
 import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
 import { loadConfig } from '@/util/config';
-import outputProductSize from "@/util/outputProductSize";
+import handleStats from "@/util/handleStats";
 const openBrowser = require('react-dev-utils/openBrowser')
 const clearConsole = require('react-dev-utils/clearConsole');
 
@@ -50,7 +50,7 @@ export const buildWebpack = () => {
       if (err) {
         loggerError(err);
       } else {
-        outputProductSize(stats);
+        handleStats(stats);
         loggerSuccess('WEBPACK SUCCESS!');
       }
       compiler.close(() => {
