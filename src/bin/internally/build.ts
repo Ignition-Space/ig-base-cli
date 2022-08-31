@@ -3,7 +3,7 @@
  * @Description: 构建相关
  */
 
-import { buildWebpack, buildRollup, devServerWebpack } from '@/index'
+import { buildWebpack, buildRollup, devServerWebpack, analysisWebpack } from '@/index'
 
 /**
  * @description: webpack 构建
@@ -29,6 +29,15 @@ export const webpackBuildCommand = {
   }
 }
 
+export const webpackAnalysisCommand = {
+  version: '0.1.0',
+  description: 'start webpack bundle analysis',
+  command: 'analysis',
+  action: () => {
+    analysisWebpack()
+  }
+}
+
 /**
 * @description: rollup 构建
 * @param {*}
@@ -44,5 +53,6 @@ export const rollupCommand = {
 export default [
   webpackDevCommand,
   webpackBuildCommand,
+  webpackAnalysisCommand,
   rollupCommand
 ]

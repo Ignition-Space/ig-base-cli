@@ -28,6 +28,15 @@ export const buildWebpack = async () => {
   }
 }
 
+// webpack 产物分析
+export const analysisWebpack = async () => {
+  try {
+    await selfBuildWebpack({ analysis: true })
+  } catch (error) {
+    loggerError(error)
+  }
+}
+
 // webpack 开发
 export const devServerWebpack = async () => {
   try {

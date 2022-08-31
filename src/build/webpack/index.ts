@@ -15,6 +15,7 @@ import { getCssLoaders, getCssPlugin } from './css.config'
 import cacheConfig from './cache.config';
 import { loadConfig } from '@/util/config';
 import handleStats from "@/util/handleStats";
+import { getAnalysisPlugin } from "@/build/webpack/analysis.config";
 const openBrowser = require('react-dev-utils/openBrowser')
 const clearConsole = require('react-dev-utils/clearConsole');
 
@@ -25,20 +26,26 @@ const clearConsole = require('react-dev-utils/clearConsole');
 const WebpackDevServer = require('webpack-dev-server')
 
 /**
- * @description: 
+ * @description:
  * @param {*} webpack 构建
  * @return {*}
  */
-export const buildWebpack = () => {
+export const buildWebpack = (options: { analysis?: true } = {}) => {
+  const { analysis } = options;
 
   loggerTiming('WEBPACK BUILD');
 
   const rewriteConfig = loadConfig();
 
+  // TODO replace webpack-merge on webpack5
   const webpackConfig = getProConfig({
     ...rewriteConfig,
     cssLoader: getCssLoaders(false),
-    ...getCssPlugin(),
+    plugins: [
+      ...getCssPlugin(),
+      ...(analysis ? getAnalysisPlugin() : []),
+      ...(rewriteConfig.plugins || []),
+    ],
     ...cacheConfig
   })
 
