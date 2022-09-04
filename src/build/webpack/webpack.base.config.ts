@@ -8,8 +8,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 import { Configuration } from 'webpack'
+
 import webpack from 'webpack'
+
 const chalk = require('chalk')
+
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 interface IWebpack extends Configuration {
@@ -18,7 +21,7 @@ interface IWebpack extends Configuration {
   publicPath?: string
   cssLoader?: any,
   plugins?: any,
-  injectionEnvironment?: {[key: string]: string}
+  injectionEnvironment?: { [key: string]: string }
 }
 
 const imageInlineSizeLimit = parseInt(
@@ -66,24 +69,6 @@ export default ({
             filename: 'imgs/[hash:10].[ext]'
           }
         },
-        // {
-        //   test: /\.(png|svg|jpg|gif|jpeg)$/,
-        //   loader: require.resolve('file-loader'),
-        //   options: {
-        //     outputPath: "images/",
-        //     limit: imageInlineSizeLimit,
-        //     name: 'static/media/[name].[hash:8].[ext]',
-        //     useRelativePath: true
-        //   },
-        // },
-        // {
-        //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        //   loader: require.resolve('url-loader'),
-        //   options: {
-        //     limit: imageInlineSizeLimit,
-        //     name: 'static/media/[name].[hash:8].[ext]',
-        //   },
-        // },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
           loader: 'file-loader',

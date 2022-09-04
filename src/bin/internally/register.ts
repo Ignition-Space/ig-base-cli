@@ -14,7 +14,6 @@ const { registerPlugin } = inquirer
  * @return {*}
  */
 export const registerPluginCommand = {
-  version: '0.1.0',
   description: 'register plugin',
   command: 'register plugin',
   action: () => registerPlugin()

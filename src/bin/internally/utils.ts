@@ -11,7 +11,6 @@ import { checkVersion } from '@/index';
  * @return {*}
  */
 export const checkVersionCommand = {
-  version: '0.1.0',
   description: 'check cli version',
   command: 'check',
   action: () => checkVersion()

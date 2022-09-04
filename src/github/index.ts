@@ -1,8 +1,8 @@
 /*
  * @Author: Cookie
  * @Date: 2021-08-13 12:08:35
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 16:40:23
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-09-04 15:32:53
  * @Description:
  */
 
@@ -10,6 +10,7 @@ import { GET } from "./request"
 
 import type { ITpl } from '@/tpl'
 import { loggerError } from "@/util"
+
 export interface IBranch {
   name: string,
   commit: {

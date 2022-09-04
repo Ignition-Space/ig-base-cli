@@ -1,7 +1,6 @@
 import chalk from 'chalk'
 import { Stats } from 'webpack';
 
-
 const friendlySyntaxErrorLabel = "Syntax error:";
 
 function isLikelyASyntaxError(message: string) {
@@ -81,18 +80,13 @@ function formatMessage(message: string | Error | Error[]) {
     ];
   }
 
-  // if (lines[1] && lines[1].match(/Cannot find module.+less/)) {
-  //   lines[1] = "To import less files, you first need to install less.\n";
-  //   lines[1] +=
-  //     "Run `npm install less` or `yarn add less` inside your workspace.";
-  // }
-
   _message = lines.join("\n");
   // 内部堆栈剥离
   _message = _message.replace(
     /^\s*at\s((?!webpack:).)*:\d+:\d+[\s)]*(\n|$)/gm,
     ""
   );
+
   _message = _message.replace(/^\s*at\s<anonymous>(\n|$)/gm, ""); // at <anonymous>
   lines = _message.split("\n");
 

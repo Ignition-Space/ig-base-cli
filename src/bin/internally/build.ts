@@ -12,7 +12,6 @@ import { buildWebpack, buildRollup, devServerWebpack, analysisWebpack } from '@/
  */
 
 export const webpackDevCommand = {
-  version: '0.1.0',
   description: 'start webpack build',
   command: 'start',
   action: () => {
@@ -21,7 +20,6 @@ export const webpackDevCommand = {
 }
 
 export const webpackBuildCommand = {
-  version: '0.1.0',
   description: 'start webpack build',
   command: 'build',
   action: () => {
@@ -30,7 +28,6 @@ export const webpackBuildCommand = {
 }
 
 export const webpackAnalysisCommand = {
-  version: '0.1.0',
   description: 'start webpack bundle analysis',
   command: 'analysis',
   action: () => {
@@ -44,7 +41,6 @@ export const webpackAnalysisCommand = {
 * @return {*}
 */
 export const rollupCommand = {
-  version: '0.1.0',
   description: 'start rollup build',
   command: 'rollup:dev',
   action: () => buildRollup()

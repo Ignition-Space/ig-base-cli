@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-04 14:02:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-30 14:43:45
+ * @LastEditTime: 2022-09-04 17:43:32
  * @Description:
  */
 
@@ -22,7 +22,6 @@ const clearConsole = require('react-dev-utils/clearConsole');
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 
-// const WebpackDevServer = require('webpack-dev-server/lib/Server')
 const WebpackDevServer = require('webpack-dev-server')
 
 /**
@@ -80,6 +79,7 @@ export const devServerWebpack = () => {
   loggerTiming('WEBPACK DEV');
 
   const rewriteConfig = loadConfig();
+
   const webpackConfig = getDevConfig({
     cssLoader: getCssLoaders(true),
     ...rewriteConfig,
@@ -88,10 +88,10 @@ export const devServerWebpack = () => {
 
   let firstOpen = false
 
-  const HOST = webpackConfig?.devServer?.host || 'localhost'
-  const PORT = webpackConfig?.devServer?.port || 8000
-  const protocol = webpackConfig?.devServer?.https ? 'https' : 'http'
-  const url = `${protocol}://${HOST}:${PORT}`
+  const host = webpackConfig?.devServer?.host || 'localhost'
+  const port = webpackConfig?.devServer?.port || 8000
+  const https = webpackConfig?.devServer?.https ? 'https' : 'http'
+  const url = `${https}://${host}:${port}`
 
   const compiler = webpack(webpackConfig);
 
@@ -107,9 +107,8 @@ export const devServerWebpack = () => {
     historyApiFallback: true,
     hot: true,
     compress: true,
-    port: 8000,
     open: false,
-    ...rewriteConfig.devServer,
+    ...webpackConfig?.devServer
   };
 
   const server = new WebpackDevServer(devServerOptions, compiler);
