@@ -13,7 +13,6 @@ const { addTpl, selectTpl } = inquirer
  * @return {*}
  */
 export const addTplCommand = {
-  version: '0.1.0',
   description: 'add tpl',
   command: 'add tpl',
   action: () => addTpl()
@@ -26,7 +25,6 @@ export const addTplCommand = {
 * @return {*}
 */
 export const selectTplCommand = {
-  version: '0.1.0',
   description: 'init tpl',
   command: 'init tpl',
   action: () => selectTpl()

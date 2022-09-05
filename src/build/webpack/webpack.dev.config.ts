@@ -1,14 +1,20 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-18 19:16:47
- * @LastEditors: Cookie
- * @LastEditTime: 2021-07-19 20:35:55
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-09-04 17:45:40
  * @Description:
  */
 
 import getBaseConfig from './webpack.base.config'
 import { getCwdPath, } from '@/util'
-import { Configuration } from 'webpack'
+
+import { Configuration as webpackConfiguration } from 'webpack'
+import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+
+interface Configuration extends webpackConfiguration {
+  devServer?: WebpackDevServerConfiguration
+}
 
 interface IDevWebpackConfig extends Configuration {
   entry?: {
@@ -20,9 +26,11 @@ interface IDevWebpackConfig extends Configuration {
     path: string
   }
   template?: string,
-  injectionEnvironment?: {[key: string]: string}
+  injectionEnvironment?: { [key: string]: string }
   publicPath?: string
   cssLoader?: any
+  devServer?: DevServer,
+  plugins?: any
 }
 
 export const getDevConfig = (config: IDevWebpackConfig): Configuration => {
@@ -33,7 +41,7 @@ export const getDevConfig = (config: IDevWebpackConfig): Configuration => {
     ...getBaseConfig({
       mode: 'development',
       entry: {
-        app: getCwdPath(entry?.app || './src/index.js')
+        app: getCwdPath(entry?.app || './src/index.tsx')
       },
       output: {
         chunkFilename: output?.chunkFilename || '[name].[chunkhash].js',
@@ -45,6 +53,11 @@ export const getDevConfig = (config: IDevWebpackConfig): Configuration => {
       cssLoader,
       plugins
     }),
+    devServer: {
+      host: 'localhost',
+      port: '8000',
+      https: false
+    },
     ...rest
   }
 }

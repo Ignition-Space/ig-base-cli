@@ -12,10 +12,11 @@ interface IFeCliConfig extends Omit<Configuration, 'cache'> {
     path: string
   }
   template?: string,
-  injectionEnvironment?: {[key: string]: string}
+  injectionEnvironment?: { [key: string]: string }
   publicPath?: string
   cssLoader?: any
-  plugins?: any
+  plugins?: any;
+  devServer?: DevServer
 }
 
 const tryLoadConfig = (fileName: string) => {
@@ -28,9 +29,9 @@ const tryLoadConfig = (fileName: string) => {
 
 export const loadConfig = () => {
   let config: IFeCliConfig;
-  config = tryLoadConfig('cli.config.json');
+  config = tryLoadConfig('boty.config.json');
   if (!config) {
-    config = tryLoadConfig('cli.config.js');
+    config = tryLoadConfig('boty.config.js');
   }
   return config;
 }

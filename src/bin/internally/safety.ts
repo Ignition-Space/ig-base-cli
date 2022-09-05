@@ -11,7 +11,6 @@ import { execEslint } from '@/index'
  * @return {*}
  */
 export const eslintCommand = {
-  version: '0.1.0',
   description: 'start eslint and fix code',
   command: 'eslint',
   action: () => execEslint()

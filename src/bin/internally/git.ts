@@ -13,7 +13,6 @@ const { initGit } = inquirer
  * @return {*}
  */
 export const initGitCommand = {
-  version: '0.1.0',
   description: 'git init',
   command: 'git init',
   action: () => initGit()
