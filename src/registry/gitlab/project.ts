@@ -2,14 +2,11 @@
  * @Author: Cookie
  * @Date: 2020-07-29 21:23:05
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-07-30 10:43:24
+ * @LastEditTime: 2023-07-30 16:47:49
  * @Description: gitLab 项目模块 api
  */
 
 import { methodV } from "@/registry/gitlab/request";
-// import { loadFile, existsFile } from '@/util/file'
-// import { getDirPath } from '@/util'
-// const defaultConfig = loadFile(getDirPath('../config/default.config.json')) // 读取本地配置
 
 interface IProjectList {
   pageSize?: number

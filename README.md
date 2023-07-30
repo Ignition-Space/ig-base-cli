@@ -1,4 +1,4 @@
-# @boty-design/fe-cli
+# @ignition-space/ig-base-cli
 
 [![NPM version][npm-ver-img]][npm-url]
 [![NPM downloads][npm-dl-img]][npm-url]
@@ -6,9 +6,9 @@
 
 ## 安装
 ```jsx
-$ npm install @boty-design/fe-cli --save
+$ npm install @ignition-space/ig-base-cli --save
 
-$ yarn add @boty-design/fe-cli
+$ yarn add @ignition-space/ig-base-cli
 
 ```
 ## 命令
@@ -26,7 +26,7 @@ $ yarn add @boty-design/fe-cli
 [MIT](https://en.wikipedia.org/wiki/MIT_License)
 
 
-[npm-ver-img]: https://img.shields.io/npm/v/@boty-design/fe-cli?style=flat-square
-[npm-dl-img]: https://img.shields.io/npm/dm/@boty-design/fe-cli.svg?style=flat-square
-[npm-lc-img]: https://img.shields.io/npm/l/@boty-design/fe-cli.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/@boty-design/fe-cli
+[npm-ver-img]: https://img.shields.io/npm/v/@ignition-space/ig-base-cli?style=flat-square
+[npm-dl-img]: https://img.shields.io/npm/dm/@ignition-space/ig-base-cli.svg?style=flat-square
+[npm-lc-img]: https://img.shields.io/npm/l/@ignition-space/ig-base-cli.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@ignition-space/ig-base-cli

@@ -3,7 +3,7 @@
  * @Description: 插件模块
  */
 
-import { loggerError, loggerSuccess, getDirPath, getCwdPath, loggerWarring } from '@/util'
+import { loggerError, loggerSuccess } from '@/util'
 import { loadFile, writeFile } from '@/util/file'
 
 export interface IPlugin {

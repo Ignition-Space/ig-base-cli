@@ -4,11 +4,11 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:28:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-09-04 17:39:47
+ * @LastEditTime: 2023-07-30 13:50:17
  * @Description:
  */
 
-import path from "path";
+import * as path from "path";
 import alias from "module-alias";
 const packageConfig = require("../../package.json")
 

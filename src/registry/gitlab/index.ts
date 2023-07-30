@@ -2,13 +2,13 @@
  * @Author: Cookie
  * @Date: 2021-07-25 21:34:07
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 11:37:46
+ * @LastEditTime: 2023-07-30 16:47:44
  * @Description:
  */
 
 import { getToken } from './user'
-import { loggerError, loggerSuccess, getDirPath } from '@/util'
-import { loadFile, writeFile } from '@/util/file'
+import { loggerError, loggerSuccess } from '@/util'
+import { writeFile } from '@/util/file'
 
 /**
  * @description: 初始化 Git 信息

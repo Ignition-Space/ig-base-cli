@@ -13,7 +13,7 @@ const parseVersion = (ver: string) => {
 }
 
 export const checkVersion = async () => {
-  const latestVer = await latestVersion('@boty-design/fe-cli');
+  const latestVer = await latestVersion('@ignition-space/ig-base-cli');
   if (parseVersion(latestVer) > parseVersion(packageInfo.version)) {
     loggerWarring(`The current version is the :  ${latestVer}`)
   } else {
