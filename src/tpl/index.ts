@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-08-12 22:01:01
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 23:16:03
+ * @LastEditTime: 2023-07-30 10:53:54
  * @Description:
  */
 
@@ -18,7 +18,7 @@ export interface ITpl {
   apiUrl?: string
 }
 
-const cacheTpl = '.botyCache'
+const cacheTpl = '.igCache'
 
 /**
  * @description: 添加模板信息
@@ -79,8 +79,8 @@ export const getTplList = () => {
     }
     loggerWarring('No template! Please add template first!')
     process.exit(1)
-  } catch (error) {
-    loggerError(error)
+  } catch (err) {
+    loggerError(err)
   }
 }
 

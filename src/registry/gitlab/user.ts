@@ -1,13 +1,13 @@
 /*
  * @Author: Cookie
  * @Date: 2021-08-07 17:13:45
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 12:10:43
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-30 10:43:15
  * @Description:
  */
 
 
-import { gitPost } from "@/gitlab/request";
+import { gitPost } from "@/registry/gitlab/request";
 interface IToken {
   access_token: string
   token_type: string

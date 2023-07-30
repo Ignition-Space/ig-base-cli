@@ -16,7 +16,6 @@ export const checkVersionCommand = {
   action: () => checkVersion()
 }
 
-
 export default [
   checkVersionCommand,
 ]

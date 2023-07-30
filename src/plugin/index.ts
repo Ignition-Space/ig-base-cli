@@ -10,7 +10,7 @@ export interface IPlugin {
   name: string
 }
 
-const cacheTpl = '.botyCache'
+const cacheTpl = '.igCache'
 
 /**
  * @description: 添加插件信息

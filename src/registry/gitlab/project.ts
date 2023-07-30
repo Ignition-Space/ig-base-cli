@@ -1,12 +1,12 @@
 /*
  * @Author: Cookie
  * @Date: 2020-07-29 21:23:05
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 12:10:41
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-30 10:43:24
  * @Description: gitLab 项目模块 api
  */
 
-import { methodV } from "@/gitlab/request";
+import { methodV } from "@/registry/gitlab/request";
 // import { loadFile, existsFile } from '@/util/file'
 // import { getDirPath } from '@/util'
 // const defaultConfig = loadFile(getDirPath('../config/default.config.json')) // 读取本地配置

@@ -1,13 +1,13 @@
 /*
  * @Author: Cookie
  * @Date: 2021-08-03 23:41:18
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-12 23:31:33
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-30 10:43:21
  * @Description:
  */
 
 import inquirer from 'inquirer';
-import { gitLabInit } from '@/gitlab'
+import { gitLabInit } from '@/registry/gitlab'
 import { loggerWarring } from '@/util'
 
 const promptList = [

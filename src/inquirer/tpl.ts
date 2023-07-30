@@ -1,8 +1,8 @@
 /*
  * @Author: Cookie
  * @Date: 2021-08-03 23:41:18
- * @LastEditors: Cookie
- * @LastEditTime: 2021-08-13 16:39:53
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-30 10:43:19
  * @Description:
  */
 
@@ -12,8 +12,8 @@ import { Subject } from 'rxjs';
 import { updateTpl, getTplList, loadTpl } from '@/tpl'
 
 import type { ITpl } from '@/tpl'
-import { getGithubBranch } from '@/github';
-import type { IBranch } from '@/github';
+import { getGithubBranch } from '@/registry/github';
+import type { IBranch } from '@/registry/github';
 import { loggerError } from '@/util';
 
 /**

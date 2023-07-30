@@ -2,7 +2,7 @@
  * @Author: Cookie
  * @Date: 2021-07-03 22:23:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-29 23:02:52
+ * @LastEditTime: 2023-07-30 10:55:26
  * @Description:
  */
 
@@ -30,22 +30,24 @@ export const loggerTiming = (str: string = '', start: boolean = true) => {
   }
 }
 
+type LogType = string | unknown
+
 // 普通日志
-export const loggerInfo = (str: string = '') => {
+export const loggerInfo = (str: LogType) => {
   console.log(chalk.green(`[INFO]： ${str}`));
 }
 
 // 警告日志
-export const loggerWarring = (str: string = '') => {
+export const loggerWarring = (str: LogType) => {
   console.log(chalk.yellowBright(`[WARRING]： ${str}`));
 }
 
 // 成功日志
-export const loggerSuccess = (str: string = '') => {
+export const loggerSuccess = (str: LogType) => {
   console.log(chalk.greenBright(`[SUCCESS]： ${str}`));
 }
 
 // 报错日志
-export const loggerError = (str: string = '') => {
+export const loggerError = (str: LogType) => {
   console.log(chalk.redBright(`[ERROR]： ${str}`));
 }
